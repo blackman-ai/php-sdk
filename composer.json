@@ -1,0 +1,40 @@
+{
+    "name": "blackman-ai/client",
+    "description": "Official PHP client for Blackman AI - The AI API proxy that optimizes token usage",
+    "keywords": ["blackman", "ai", "llm", "openai", "api", "sdk"],
+    "homepage": "https://www.useblackman.ai",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Blackman AI",
+            "email": "support@blackman.ai",
+            "homepage": "https://www.useblackman.ai"
+        }
+    ],
+    "require": {
+        "php": "^7.4 || ^8.0",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "guzzlehttp/guzzle": "^7.4",
+        "guzzlehttp/psr7": "^2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Blackman\\Client\\": "lib/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Blackman\\Client\\Test\\": "test/"
+        }
+    },
+    "support": {
+        "email": "support@blackman.ai",
+        "issues": "https://github.com/blackman-ai/php-sdk/issues",
+        "source": "https://github.com/blackman-ai/php-sdk"
+    }
+}
