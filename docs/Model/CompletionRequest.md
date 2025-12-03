@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **temperature** | **float** |  | [optional]
 **top_p** | **float** |  | [optional]
 **messages** | [**\BlackmanClient\Model\Message[]**](Message.md) |  |
+**metadata** | **object** | Optional metadata for tracking, analytics, and conditional processing. Can include session IDs, user context, feature flags, or any custom data. This metadata is logged with the request and can be used for filtering/analysis. | [optional]
 **model** | **string** |  |
 **provider** | [**\BlackmanClient\Model\Provider**](Provider.md) |  |
 

@@ -13,7 +13,7 @@
 /**
  * Blackman AI API
  *
- * A transparent AI API proxy that optimizes token usage to reduce costs.  ## Authentication  Blackman AI supports two authentication methods:  ### 1. API Key (Recommended for integrations)  Use the API key created from your dashboard:  ```bash curl -X POST https://ap.useblackman.ai/v1/completions \\   -H \"Authorization: Bearer sk_your_api_key_here\" \\   -H \"Content-Type: application/json\" \\   -d '{\"provider\": \"OpenAI\", \"model\": \"gpt-4\", \"messages\": [{\"role\": \"user\", \"content\": \"Hello!\"}]}' ```  ### 2. JWT Token (For web UI)  Obtain a JWT token by logging in:  ```bash curl -X POST https://ap.useblackman.ai/v1/auth/login \\   -H \"Content-Type: application/json\" \\   -d '{\"email\": \"user@example.com\", \"password\": \"yourpassword\"}' ```  Then use the token:  ```bash curl -X POST https://ap.useblackman.ai/v1/completions \\   -H \"Authorization: Bearer your_jwt_token\" \\   -H \"Content-Type: application/json\" \\   -d '{...}' ```  ### Provider API Keys (Optional)  You can optionally provide your own LLM provider API key via the `X-Provider-Api-Key` header, or store it in your account settings.  ## Client SDKs  Auto-generated SDKs are available for 10 languages:  - **TypeScript**: [View Docs](/v1/sdks/typescript) - **Python**: [View Docs](/v1/sdks/python) - **Go**: [View Docs](/v1/sdks/go) - **Java**: [View Docs](/v1/sdks/java) - **Ruby**: [View Docs](/v1/sdks/ruby) - **PHP**: [View Docs](/v1/sdks/php) - **C#**: [View Docs](/v1/sdks/csharp) - **Rust**: [View Docs](/v1/sdks/rust) - **Swift**: [View Docs](/v1/sdks/swift) - **Kotlin**: [View Docs](/v1/sdks/kotlin)  All SDKs are generated from this OpenAPI spec using [openapi-generator](https://openapi-generator.tech).  ## Quick Start  ```python # Python example with API key import blackman_client from blackman_client import CompletionRequest  configuration = blackman_client.Configuration(     host=\"http://localhost:8080\",     access_token=\"sk_your_api_key_here\"  # Your Blackman API key )  with blackman_client.ApiClient(configuration) as api_client:     api = blackman_client.CompletionsApi(api_client)     response = api.completions(         CompletionRequest(             provider=\"OpenAI\",             model=\"gpt-4o\",             messages=[{\"role\": \"user\", \"content\": \"Hello!\"}]         )     ) ```
+ * A transparent AI API proxy that optimizes token usage to reduce costs.  ## Authentication  Blackman AI supports two authentication methods:  ### 1. API Key (Recommended for integrations)  Use the API key created from your dashboard:  ```bash curl -X POST https://app.useblackman.ai/v1/completions \\   -H \"Authorization: Bearer sk_your_api_key_here\" \\   -H \"Content-Type: application/json\" \\   -d '{\"provider\": \"OpenAI\", \"model\": \"gpt-4\", \"messages\": [{\"role\": \"user\", \"content\": \"Hello!\"}]}' ```  ### 2. JWT Token (For web UI)  Obtain a JWT token by logging in:  ```bash curl -X POST https://app.useblackman.ai/v1/auth/login \\   -H \"Content-Type: application/json\" \\   -d '{\"email\": \"user@example.com\", \"password\": \"yourpassword\"}' ```  Then use the token:  ```bash curl -X POST https://app.useblackman.ai/v1/completions \\   -H \"Authorization: Bearer your_jwt_token\" \\   -H \"Content-Type: application/json\" \\   -d '{...}' ```  ### Provider API Keys (Optional)  You can optionally provide your own LLM provider API key via the `X-Provider-Api-Key` header, or store it in your account settings.  ## Client SDKs  Auto-generated SDKs are available for 10 languages:  - **TypeScript**: [View Docs](https://github.com/blackman-ai/typescript-sdk) - **Python**: [View Docs](https://github.com/blackman-ai/python-sdk) - **Go**: [View Docs](https://github.com/blackman-ai/go-sdk) - **Java**: [View Docs](https://github.com/blackman-ai/java-sdk) - **Ruby**: [View Docs](https://github.com/blackman-ai/ruby-sdk) - **PHP**: [View Docs](https://github.com/blackman-ai/php-sdk) - **C#**: [View Docs](https://github.com/blackman-ai/csharp-sdk) - **Rust**: [View Docs](https://github.com/blackman-ai/rust-sdk) - **Swift**: [View Docs](https://github.com/blackman-ai/swift-sdk) - **Kotlin**: [View Docs](https://github.com/blackman-ai/kotlin-sdk)  All SDKs are generated from this OpenAPI spec using [openapi-generator](https://openapi-generator.tech).  ## Quick Start  ```python # Python example with API key import blackman_client from blackman_client import CompletionRequest  configuration = blackman_client.Configuration(     host=\"http://localhost:8080\",     access_token=\"sk_your_api_key_here\"  # Your Blackman API key )  with blackman_client.ApiClient(configuration) as api_client:     api = blackman_client.CompletionsApi(api_client)     response = api.completions(         CompletionRequest(             provider=\"OpenAI\",             model=\"gpt-4o\",             messages=[{\"role\": \"user\", \"content\": \"Hello!\"}]         )     ) ```
  *
  * The version of the OpenAPI document: 0.1.0
  * Generated by: https://openapi-generator.tech
@@ -63,6 +63,7 @@ class CompletionRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
         'temperature' => 'float',
         'top_p' => 'float',
         'messages' => '\BlackmanClient\Model\Message[]',
+        'metadata' => 'object',
         'model' => 'string',
         'provider' => '\BlackmanClient\Model\Provider'
     ];
@@ -81,6 +82,7 @@ class CompletionRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
         'temperature' => 'float',
         'top_p' => 'float',
         'messages' => null,
+        'metadata' => null,
         'model' => null,
         'provider' => null
     ];
@@ -97,6 +99,7 @@ class CompletionRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
         'temperature' => true,
         'top_p' => true,
         'messages' => false,
+        'metadata' => true,
         'model' => false,
         'provider' => false
     ];
@@ -193,6 +196,7 @@ class CompletionRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
         'temperature' => 'temperature',
         'top_p' => 'top_p',
         'messages' => 'messages',
+        'metadata' => 'metadata',
         'model' => 'model',
         'provider' => 'provider'
     ];
@@ -209,6 +213,7 @@ class CompletionRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
         'temperature' => 'setTemperature',
         'top_p' => 'setTopP',
         'messages' => 'setMessages',
+        'metadata' => 'setMetadata',
         'model' => 'setModel',
         'provider' => 'setProvider'
     ];
@@ -225,6 +230,7 @@ class CompletionRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
         'temperature' => 'getTemperature',
         'top_p' => 'getTopP',
         'messages' => 'getMessages',
+        'metadata' => 'getMetadata',
         'model' => 'getModel',
         'provider' => 'getProvider'
     ];
@@ -292,6 +298,7 @@ class CompletionRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
         $this->setIfExists('temperature', $data ?? [], null);
         $this->setIfExists('top_p', $data ?? [], null);
         $this->setIfExists('messages', $data ?? [], null);
+        $this->setIfExists('metadata', $data ?? [], null);
         $this->setIfExists('model', $data ?? [], null);
         $this->setIfExists('provider', $data ?? [], null);
     }
@@ -549,6 +556,40 @@ class CompletionRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
             throw new \InvalidArgumentException('non-nullable messages cannot be null');
         }
         $this->container['messages'] = $messages;
+
+        return $this;
+    }
+
+    /**
+     * Gets metadata
+     *
+     * @return object|null
+     */
+    public function getMetadata()
+    {
+        return $this->container['metadata'];
+    }
+
+    /**
+     * Sets metadata
+     *
+     * @param object|null $metadata Optional metadata for tracking, analytics, and conditional processing. Can include session IDs, user context, feature flags, or any custom data. This metadata is logged with the request and can be used for filtering/analysis.
+     *
+     * @return self
+     */
+    public function setMetadata($metadata)
+    {
+        if (is_null($metadata)) {
+            array_push($this->openAPINullablesSetToNull, 'metadata');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('metadata', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['metadata'] = $metadata;
 
         return $this;
     }
