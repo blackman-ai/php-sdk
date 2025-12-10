@@ -1,6 +1,6 @@
 <?php
 /**
- * Message
+ * ContentPart
  *
  * PHP version 8.1
  *
@@ -32,15 +32,16 @@ use \ArrayAccess;
 use \BlackmanClient\ObjectSerializer;
 
 /**
- * Message Class Doc Comment
+ * ContentPart Class Doc Comment
  *
  * @category Class
+ * @description Content part for multimodal messages (vision support)
  * @package  BlackmanClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class Message implements ModelInterface, ArrayAccess, \JsonSerializable
+class ContentPart implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +50,7 @@ class Message implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'Message';
+    protected static $openAPIModelName = 'ContentPart';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +58,9 @@ class Message implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'content' => '\BlackmanClient\Model\MessageContent',
-        'role' => 'string'
+        'text' => 'string',
+        'type' => 'string',
+        'image_url' => '\BlackmanClient\Model\ImageUrl'
     ];
 
     /**
@@ -69,8 +71,9 @@ class Message implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'content' => null,
-        'role' => null
+        'text' => null,
+        'type' => null,
+        'image_url' => null
     ];
 
     /**
@@ -79,8 +82,9 @@ class Message implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'content' => false,
-        'role' => false
+        'text' => false,
+        'type' => false,
+        'image_url' => false
     ];
 
     /**
@@ -169,8 +173,9 @@ class Message implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'content' => 'content',
-        'role' => 'role'
+        'text' => 'text',
+        'type' => 'type',
+        'image_url' => 'image_url'
     ];
 
     /**
@@ -179,8 +184,9 @@ class Message implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'content' => 'setContent',
-        'role' => 'setRole'
+        'text' => 'setText',
+        'type' => 'setType',
+        'image_url' => 'setImageUrl'
     ];
 
     /**
@@ -189,8 +195,9 @@ class Message implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'content' => 'getContent',
-        'role' => 'getRole'
+        'text' => 'getText',
+        'type' => 'getType',
+        'image_url' => 'getImageUrl'
     ];
 
     /**
@@ -234,6 +241,21 @@ class Message implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
+    public const TYPE_TEXT = 'text';
+    public const TYPE_IMAGE_URL = 'image_url';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getTypeAllowableValues()
+    {
+        return [
+            self::TYPE_TEXT,
+            self::TYPE_IMAGE_URL,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -250,8 +272,9 @@ class Message implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('content', $data ?? [], null);
-        $this->setIfExists('role', $data ?? [], null);
+        $this->setIfExists('text', $data ?? [], null);
+        $this->setIfExists('type', $data ?? [], null);
+        $this->setIfExists('image_url', $data ?? [], null);
     }
 
     /**
@@ -281,11 +304,23 @@ class Message implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['content'] === null) {
-            $invalidProperties[] = "'content' can't be null";
+        if ($this->container['text'] === null) {
+            $invalidProperties[] = "'text' can't be null";
         }
-        if ($this->container['role'] === null) {
-            $invalidProperties[] = "'role' can't be null";
+        if ($this->container['type'] === null) {
+            $invalidProperties[] = "'type' can't be null";
+        }
+        $allowedValues = $this->getTypeAllowableValues();
+        if (!is_null($this->container['type']) && !in_array($this->container['type'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'type', must be one of '%s'",
+                $this->container['type'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        if ($this->container['image_url'] === null) {
+            $invalidProperties[] = "'image_url' can't be null";
         }
         return $invalidProperties;
     }
@@ -303,55 +338,92 @@ class Message implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets content
+     * Gets text
      *
-     * @return \BlackmanClient\Model\MessageContent
+     * @return string
      */
-    public function getContent()
+    public function getText()
     {
-        return $this->container['content'];
+        return $this->container['text'];
     }
 
     /**
-     * Sets content
+     * Sets text
      *
-     * @param \BlackmanClient\Model\MessageContent $content content
+     * @param string $text text
      *
      * @return self
      */
-    public function setContent($content)
+    public function setText($text)
     {
-        if (is_null($content)) {
-            throw new \InvalidArgumentException('non-nullable content cannot be null');
+        if (is_null($text)) {
+            throw new \InvalidArgumentException('non-nullable text cannot be null');
         }
-        $this->container['content'] = $content;
+        $this->container['text'] = $text;
 
         return $this;
     }
 
     /**
-     * Gets role
+     * Gets type
      *
      * @return string
      */
-    public function getRole()
+    public function getType()
     {
-        return $this->container['role'];
+        return $this->container['type'];
     }
 
     /**
-     * Sets role
+     * Sets type
      *
-     * @param string $role \"user\", \"assistant\", \"system\"
+     * @param string $type type
      *
      * @return self
      */
-    public function setRole($role)
+    public function setType($type)
     {
-        if (is_null($role)) {
-            throw new \InvalidArgumentException('non-nullable role cannot be null');
+        if (is_null($type)) {
+            throw new \InvalidArgumentException('non-nullable type cannot be null');
         }
-        $this->container['role'] = $role;
+        $allowedValues = $this->getTypeAllowableValues();
+        if (!in_array($type, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'type', must be one of '%s'",
+                    $type,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['type'] = $type;
+
+        return $this;
+    }
+
+    /**
+     * Gets image_url
+     *
+     * @return \BlackmanClient\Model\ImageUrl
+     */
+    public function getImageUrl()
+    {
+        return $this->container['image_url'];
+    }
+
+    /**
+     * Sets image_url
+     *
+     * @param \BlackmanClient\Model\ImageUrl $image_url image_url
+     *
+     * @return self
+     */
+    public function setImageUrl($image_url)
+    {
+        if (is_null($image_url)) {
+            throw new \InvalidArgumentException('non-nullable image_url cannot be null');
+        }
+        $this->container['image_url'] = $image_url;
 
         return $this;
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Message
+ * ImageUrl
  *
  * PHP version 8.1
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \BlackmanClient\ObjectSerializer;
 
 /**
- * Message Class Doc Comment
+ * ImageUrl Class Doc Comment
  *
  * @category Class
  * @package  BlackmanClient
@@ -40,7 +40,7 @@ use \BlackmanClient\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class Message implements ModelInterface, ArrayAccess, \JsonSerializable
+class ImageUrl implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class Message implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'Message';
+    protected static $openAPIModelName = 'ImageUrl';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +57,8 @@ class Message implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'content' => '\BlackmanClient\Model\MessageContent',
-        'role' => 'string'
+        'detail' => 'string',
+        'url' => 'string'
     ];
 
     /**
@@ -69,8 +69,8 @@ class Message implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'content' => null,
-        'role' => null
+        'detail' => null,
+        'url' => null
     ];
 
     /**
@@ -79,8 +79,8 @@ class Message implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'content' => false,
-        'role' => false
+        'detail' => true,
+        'url' => false
     ];
 
     /**
@@ -169,8 +169,8 @@ class Message implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'content' => 'content',
-        'role' => 'role'
+        'detail' => 'detail',
+        'url' => 'url'
     ];
 
     /**
@@ -179,8 +179,8 @@ class Message implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'content' => 'setContent',
-        'role' => 'setRole'
+        'detail' => 'setDetail',
+        'url' => 'setUrl'
     ];
 
     /**
@@ -189,8 +189,8 @@ class Message implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'content' => 'getContent',
-        'role' => 'getRole'
+        'detail' => 'getDetail',
+        'url' => 'getUrl'
     ];
 
     /**
@@ -250,8 +250,8 @@ class Message implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('content', $data ?? [], null);
-        $this->setIfExists('role', $data ?? [], null);
+        $this->setIfExists('detail', $data ?? [], null);
+        $this->setIfExists('url', $data ?? [], null);
     }
 
     /**
@@ -281,11 +281,8 @@ class Message implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['content'] === null) {
-            $invalidProperties[] = "'content' can't be null";
-        }
-        if ($this->container['role'] === null) {
-            $invalidProperties[] = "'role' can't be null";
+        if ($this->container['url'] === null) {
+            $invalidProperties[] = "'url' can't be null";
         }
         return $invalidProperties;
     }
@@ -303,55 +300,62 @@ class Message implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets content
+     * Gets detail
      *
-     * @return \BlackmanClient\Model\MessageContent
+     * @return string|null
      */
-    public function getContent()
+    public function getDetail()
     {
-        return $this->container['content'];
+        return $this->container['detail'];
     }
 
     /**
-     * Sets content
+     * Sets detail
      *
-     * @param \BlackmanClient\Model\MessageContent $content content
+     * @param string|null $detail Optional detail level: \"auto\", \"low\", or \"high\"
      *
      * @return self
      */
-    public function setContent($content)
+    public function setDetail($detail)
     {
-        if (is_null($content)) {
-            throw new \InvalidArgumentException('non-nullable content cannot be null');
+        if (is_null($detail)) {
+            array_push($this->openAPINullablesSetToNull, 'detail');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('detail', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['content'] = $content;
+        $this->container['detail'] = $detail;
 
         return $this;
     }
 
     /**
-     * Gets role
+     * Gets url
      *
      * @return string
      */
-    public function getRole()
+    public function getUrl()
     {
-        return $this->container['role'];
+        return $this->container['url'];
     }
 
     /**
-     * Sets role
+     * Sets url
      *
-     * @param string $role \"user\", \"assistant\", \"system\"
+     * @param string $url url
      *
      * @return self
      */
-    public function setRole($role)
+    public function setUrl($url)
     {
-        if (is_null($role)) {
-            throw new \InvalidArgumentException('non-nullable role cannot be null');
+        if (is_null($url)) {
+            throw new \InvalidArgumentException('non-nullable url cannot be null');
         }
-        $this->container['role'] = $role;
+        $this->container['url'] = $url;
 
         return $this;
     }
